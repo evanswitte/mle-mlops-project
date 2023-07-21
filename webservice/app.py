@@ -20,7 +20,7 @@ def predict_duration(data: TaxiRide):
     prediction = predict("green-taxi-duration-lr", data)
     try:
         response = requests.post(
-            f"http://evidently_service:8085/iterate/green_taxi_data",
+            f"http://10.156.0.8:8085/iterate/green_taxi_data",
             data=TaxiRidePrediction(
                 **data.dict(), prediction=prediction
             ).model_dump_json(),

@@ -15,8 +15,8 @@ def load_model(model_name):
 def predict(model_name, data):
     load_dotenv(override=True)
     MLFLOW_TRACKING_URI = os.getenv("MLFLOW_TRACKING_URI")
-    SA_KEY = os.getenv("SA_KEY")
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = SA_KEY
+    # SA_KEY = os.getenv("SA_KEY")
+    # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = SA_KEY
 
     mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
     print("Data input:", data)
