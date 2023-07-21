@@ -1,9 +1,9 @@
-import pandas as pd
-import requests
 import time
 
+import pandas as pd
+import requests
 
-df = pd.read_parquet("data/green_tripdata_2022-02.parquet")
+df = pd.read_parquet("data/2022/green_tripdata_2022-02.parquet")
 
 features = [
     "PULocationID",
@@ -32,7 +32,7 @@ df = df[29000:]
 
 for idx, row in df.sample(frac=1).iterrows():
     time.sleep(1)
-    url = "http://localhost:8080/predict"
+    url = "http://34.159.118.223:8080/predict"
     headers = {"accept": "application/json", "Content-Type": "application/json"}
     print(row.to_json())
     response = requests.post(url, headers=headers, data=row.to_json())
