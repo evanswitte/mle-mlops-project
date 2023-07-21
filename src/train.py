@@ -4,6 +4,7 @@ import os
 
 import mlflow
 import pandas as pd
+from mlflow.tracking.client import MlflowClient
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
@@ -36,11 +37,11 @@ features = [
     "total_amount",
 ]
 target = "duration"
-model_name = f"{color}-taxi-trip-duration-lr"
+model_name = f"{color}-taxi-duration-lr"
 
 # Set up the connection to MLflow
 mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
-
+client = MlflowClient(tracking_uri=MLFLOW_TRACKING_URI)
 # Setup the MLflow experiment
 mlflow.set_experiment(model_name)
 
@@ -83,11 +84,20 @@ with mlflow.start_run() as run:
     mlflow.log_metric("rmse test", rmse_test)
 
     mlflow.sklearn.log_model(lr, "model")
+    run_id = mlflow.active_run().info.run_id
 
-    run_id = run.info.run_id
     model_uri = f"runs:/{run_id}/model"
+    model_name = f"{color}-taxi-duration-lr"
     mlflow.register_model(model_uri=model_uri, name=model_name)
 
+    model_version = 1
+    new_stage = "Production"
+    client.transition_model_version_stage(
+        name=model_name,
+        version=model_version,
+        stage=new_stage,
+        archive_existing_versions=False,
+    )
 
 if cml_run:
     with open("metrics.txt", "w") as f:
