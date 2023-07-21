@@ -7,7 +7,6 @@ evidently
 pandas
 numpy
 scikit-learn
-jupyter
 python-dotenv
 dvc
 dvc-gs

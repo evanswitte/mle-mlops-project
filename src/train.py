@@ -87,6 +87,7 @@ with mlflow.start_run() as run:
     run_id = mlflow.active_run().info.run_id
 
     model_uri = f"runs:/{run_id}/model"
+    model_name = f"{color}-taxi-duration-lr"
     mlflow.register_model(model_uri=model_uri, name=model_name)
 
     model_version = 1
