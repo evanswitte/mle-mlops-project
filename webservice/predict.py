@@ -17,6 +17,7 @@ def predict(model_name, data):
     MLFLOW_TRACKING_URI = os.getenv("MLFLOW_TRACKING_URI")
     # SA_KEY = os.getenv("SA_KEY")
     # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = SA_KEY
+    #
 
     mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
     print("Data input:", data)
