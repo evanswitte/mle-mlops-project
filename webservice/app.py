@@ -7,18 +7,17 @@ from predict import predict
 from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI()
-color = "green"
 Instrumentator().instrument(app).expose(app)
 
 
 @app.get("/")
 def index():
-    return {"message": "NYC Taxi Ride Duration Prediction"}
+    return {"message": "NYC Taxi Ride Duration linear regression Prediction"}
 
 
 @app.post("/predict", response_model=TaxiRidePrediction)
 def predict_duration(data: TaxiRide):
-    prediction = predict(f"{color}-taxi-trip-duration-lr", data)
+    prediction = predict("green-taxi-duration-lr", data)
     try:
         response = requests.post(
             f"http://evidently_service:8085/iterate/green_taxi_data",

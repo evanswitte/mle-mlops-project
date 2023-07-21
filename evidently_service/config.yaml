@@ -8,7 +8,7 @@ column_mapping:
     - fare_amount
     - total_amount
   prediction: prediction
-pretty_print: true
+
 data_format:
   header: true
   separator: ","
@@ -21,5 +21,3 @@ service:
   window_size: 500
   monitors:
     - data_drift
-    - data_quality
-    - regression_performance
