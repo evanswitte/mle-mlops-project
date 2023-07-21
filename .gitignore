@@ -161,3 +161,4 @@ cython_debug/
 
 sa_key
 *.ipynb
+.vscode
